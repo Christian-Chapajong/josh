@@ -2,6 +2,7 @@
 :root {
     --primary: #50b8e7;
     --secondary: #545454;
+    --highlight: #edb354;
     --light: #FDF5EB;
     --dark: #1E1916;
 }
@@ -12,6 +13,14 @@
     right: 30px;
     bottom: 60px;
     z-index: 99;
+}
+html, body {
+    overflow-x: hidden;
+}
+body {
+    position: relative;
+    font-size: 1.3rem;
+    height: 100%;
 }
 
 
@@ -65,25 +74,102 @@
     font-weight: normal;
 }
 
+/*** Off canvas ***/
+.off-canvas {
+    position: absolute;
+    height: 100%;
+    width: 100vw;
 
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+
+    z-index: 50;
+    background: #fff;
+}
+.slideLeft {
+    transform: translateX(0);
+}
+.no-overflow-y {
+    overflow-y: hidden;
+}
+.off-canvas__inner {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.off-canvas ul.page-links {
+    font-size: 25px;
+    padding: 6rem 1rem;
+    flex-grow: 1;
+}
+.off-canvas .social-links {
+    /* background: var(--highlight); */
+    /* font-size: 30px; */
+    padding: 2rem 1.5rem;
+}
+.social-list {
+    margin-bottom: 0;
+}
+.social-list li {
+    display: inline-block;
+    padding-right: 1.5rem;
+}
+.social-list i {
+    color: #fff;
+}
+.social-list i:hover {
+    color: var(--secondary);
+}
 /*** Navbar ***/
-.navbar.fixed-top {
+/* .navbar.fixed-top {
     display: none;
     transition: .5s;
+} */
+.navbar {
+    position: absolute;
+    right: 0;
+    z-index: 100;
+}
+.mobile-toggle {
+    padding: 1rem;
+    border-radius: 50%;
+    background: var(--primary);
+    border: none;
+}
+@media screen and (min-width: 992px) {
+    .navbar {
+        position: absolute;
+        right: 5%;
+        background: transparent;
+    }
 }
 
 .navbar .navbar-nav .nav-link {
     padding: 20px 15px;
     color: var(--dark);
-    font-size: 18px;
+    font-size: 25px;
     font-weight: 600;
     outline: none;
+}
+
+@media screen and (min-width: 1200px) {
+    .navbar .navbar-nav.white-text .nav-link {
+        color: #fff
+    }
 }
 
 .navbar .navbar-nav .nav-link:hover,
 .navbar .navbar-nav .nav-link.active {
     color: var(--primary);
 }
+
+
 
 @media (max-width: 991.98px) {
     .navbar .navbar-nav .nav-link  {
@@ -214,16 +300,58 @@
     opacity: 1;
 }
 .hero-header {
-    min-height: 80vh;
-    background:linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../img/josh1.jpeg") no-repeat center top;
+    min-height: 85vh;
+    /* background:linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../img/fridge-delivery.jpg") no-repeat center top; */
+    background:linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../img/fridge-delivery.jpg") no-repeat center center;
+    /* background: url("../img/fridge-delivery.jpg") no-repeat center center; */
+    background-position: center center;
     background-size:cover;
     display: flex;
     align-items: center;
+}
+.hero-header.fridge {
+    background-image: url("../img/fridge-delivery-2.jpg");
+}
+.hero-header.contact {
+    background-image: url("../img/contact-1.jpg");
+}
+.hero-header.photography {
+    background:linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../img/jane-and-will-5.jpeg") no-repeat center center;
+    background-size:cover;
+
+}
+.hero-header.food {
+    background:linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../img/food24.jpg") no-repeat center center;
+    background-size:cover;
+
 }
 
 .hero-header .breadcrumb-item+.breadcrumb-item::before {
     color: var(--secondary);
 }
+.hero-header__title {
+    font-size: calc(3.25rem + 4.5vw);
+}
+.hero-header__title.long {
+    font-size: calc(2.25rem + 4.5vw);
+}
+@media (min-width: 1200px) {
+    .hero-header__title {
+        font-size: 7rem;
+    }
+}
+
+/*** Info ***/
+.info-item {
+    min-height: 400px;
+    padding: 3rem 1rem;
+}
+@media (min-width: 1200px) {
+    .info-item .info-item__col{
+        margin-top: 0;
+    } 
+}
+
 
 
 /*** Facts ***/
@@ -278,7 +406,7 @@
     background: rgba(0, 0, 0, .5);
     overflow: hidden;
     opacity: 0;
-    transition: .5s;
+    transition: .3s;
 }
 
 .service-item:hover .service-overlay {
@@ -462,4 +590,59 @@
     color: var(--primary);
     letter-spacing: 1px;
     box-shadow: none;
+}
+
+/** Fridge **/
+.fridge-intro p {
+    font-size: 2rem; 
+    line-height: 3.3rem; 
+    color: var(--primary);
+    font-weight: 500;
+}
+.image-carousel .owl-stage {
+    display: flex;
+  }
+
+.image-carousel .item img{
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+.fridge-num:after {
+    content: "\002B";
+    display: inline-block;
+    margin-left: 5px;
+}
+
+/*** Photography ***/
+/* Create four equal columns that sits next to each other */
+.column {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
 }

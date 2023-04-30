@@ -16,14 +16,14 @@
     new WOW().init();
 
 
-    // Navbar on scrolling
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 300) {
-            $('.navbar').fadeIn('slow').css('display', 'flex');
-        } else {
-            $('.navbar').fadeOut('slow').css('display', 'none');
-        }
-    });
+    // // Navbar on scrolling
+    // $(window).scroll(function () {
+    //     if ($(this).scrollTop() > 300) {
+    //         $('.navbar').fadeIn('slow').css('display', 'flex');
+    //     } else {
+    //         $('.navbar').fadeOut('slow').css('display', 'none');
+    //     }
+    // });
 
 
     // Modal Video
@@ -85,6 +85,28 @@
                 items:3
             }
         }
+    });
+
+    $(".mobile-toggle").on("click", function() {
+        const offCanvas = $(".off-canvas");
+        if (!(offCanvas.hasClass("slideLeft"))) {
+            offCanvas.addClass("slideLeft");
+            $("body").addClass("no-overflow-y");
+        } else {
+            offCanvas.removeClass("slideLeft")
+            $("body").removeClass("no-overflow-y");
+        }
+    })
+
+    var selectedClass = "";
+    $(".filter").click(function(){
+      selectedClass = $(this).attr("data-rel");
+      $("#gallery").fadeTo(100, 0.1);
+      $("#gallery div").not("."+selectedClass).fadeOut().removeClass('animation');
+      setTimeout(function() {
+        $("."+selectedClass).fadeIn().addClass('animation');
+        $("#gallery").fadeTo(300, 1);
+      }, 300);
     });
 
     
